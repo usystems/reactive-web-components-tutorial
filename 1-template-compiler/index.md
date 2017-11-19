@@ -181,7 +181,7 @@ listenersé
 *  [createComponent.js](./createComponent.js). 
 *  [TemplateCompiler.js](./TemplateCompiler.js). 
 
-In the [Next Part](../2-reactifitz/index.md) we add reactivity to our interpolated and evaluated values. 
+In the [Next Part](../2-reactivity/index.md) we add reactivity to our interpolated and evaluated values. 
 
 
 
