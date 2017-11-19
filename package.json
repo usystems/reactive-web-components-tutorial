@@ -1,0 +1,12 @@
+{
+	"name": "ReactiveWebComponents",
+	"version": "0.1.0",
+	"scripts": {
+		"server": "./node_modules/.bin/http-server ./ -p 8080"
+	},
+	"dependencies": {},
+	"devDependencies": {
+		"eslint": "^4.10.0",
+		"http-server": "^0.10.0"
+	}
+}

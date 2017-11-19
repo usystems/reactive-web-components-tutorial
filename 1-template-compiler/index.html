@@ -1,0 +1,27 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<template id="hello-world-tpl">Hello <span :title="position">${name}</span></template>
+		<script type="module">
+			'use strict';
+
+			// directly use javascript module import to import the create component function
+			import createComponent from './createComponent.js';
+
+			// define a component Class
+			class HelloWorld {
+				constructor() {
+					this.name = "Jon";
+					this.position = "Manager";
+				}
+			}
+
+			// register a hello world component
+			createComponent('hello-world', '#hello-world-tpl', HelloWorld);
+		</script>
+	</head>
+	<body>
+		<hello-world></hello-world>
+	</body>
+</html>
