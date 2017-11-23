@@ -169,6 +169,43 @@ Also check the whole [TemplateCompiler.js](./TemplateCompiler.js).
 
 ## Tracking Object Changes
 
+To be able to update the expressions on property changes, we need to be able to track property changes. In es6 there
+is a `Proxy` object, to track object changes. To make this really work, we need the component proxy to be in the 
+prototype chain of the Component. So we change the `createComponent` interface. We require a `componentFactory`
+function, which receives a component base and returns the actual component.
+
+```javascript
+export default function createComponent(tagName, templateSelector, componentFactory) {
+	let proxyHandler = new ComponentProxyHandler();
+	let Base = class {
+		constructor() {
+			return new Proxy(this, proxyHandler);
+		}
+	};
+	let ComponentClass = componentFactory(Base);
+	// [...]
+}
+```
+the user code now loos the following:
+```javascript
+import createComponent from './createComponent.js';
+function helloWorldGenerator(Base) {
+	return class extends Base {
+		constructor() {
+			super();
+			this.name = "Jon";4391
+		}
+		rename(value) {
+			this.name = value;
+		}
+	};
+}
+createComponent('hello-world', '#hello-world-tpl', helloWorldGenerator);
+```
+Now we need a proxy handler which 
+  * connects the properties with the dependant properties on calling the getters
+  * and updates the expressions on changing the properties.
+
 TODO!
 
 ```javascript
@@ -217,7 +254,6 @@ export default class ComponentProxyHandler {
 	}
 }
 ```
-
 
 ## The Batch Queue
 

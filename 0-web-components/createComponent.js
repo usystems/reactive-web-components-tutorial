@@ -34,3 +34,30 @@ export default function createComponent(tagName, templateSelector) {
 	customElements.define(tagName, ComponentElement);
 }
 
+
+
+<iframe>
+<html>
+  <head>
+    <template id="hello-world-tpl">Hello World</template>
+    <script>
+		function createComponent(tagName, templateSelector) {
+		  const ComponentElement = class extends HTMLElement {
+		    constructor() {
+		      super();
+		      const template = document.querySelector(templateSelector);
+		      const stampedTemplate = document.importNode(template.content, true);
+		      const shadowRoot = this.attachShadow({ mode: 'open' });
+		      shadowRoot.appendChild(stampedTemplate);
+		    }
+		  };
+		  customElements.define(tagName, ComponentElement);
+		}
+        createComponent('hello-world', '#hello-world-tpl');
+    </script>
+  </head>
+  <body>
+    <hello-world></hello-world>
+  </body>
+</html>
+<iframe>
